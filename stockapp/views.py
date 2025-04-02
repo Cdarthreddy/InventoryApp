@@ -89,3 +89,6 @@ def edit_item(request, pk):
 def delete_item(pk):
     Item.objects.get(id=pk).delete()
     return redirect('item_list')
+
+
+
