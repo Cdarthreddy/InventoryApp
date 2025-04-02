@@ -1,0 +1,12 @@
+asgiref>=3.7.2
+astroid>=2.0.0
+dill>=0.3.0
+Django>=4.2.11
+isort>=5.11.5
+mccabe>=0.7.0
+platformdirs>=4.0.0
+pylint>=2.17.6
+sqlparse>=0.3
+tomli>=2.0.0
+tomlkit>=0.8
+typing_extensions>=3.8.0
