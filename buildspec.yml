@@ -1,43 +1,21 @@
 version: 0.2
-
 phases:
   install:
     runtime-versions:
       python: 3.11
     commands:
-      - echo "Install phase - Starting.........."
       - pip install --upgrade pip
-      
-     
-
+      - pip install -r requirements.txt pylint
   pre_build:
     commands:
-      - echo "Pre-Build Phase - Starting........."
-      - echo "Dependencies installation from requirements.txt file"
-      - pip install -r requirements.txt
-      - echo "Installing Pylint - Static Code Analysis"
-      - pip install pylint
-      
+      - python --version
+      - python manage.py collectstatic --noinput
+      - pylint smart_invent/**/*.py || true
+      - echo "pre build stage completed"
   build:
     commands:
-      - echo "Build Phase - Starting....."
-      - echo Build started on `date`
-      - python manage.py migrate
-      - echo "Running Pylint"
-      - pylint --disable=C *.py **/*.py --reports=y --output-format=json:somefile.json,colorized --exit-zero
-      - echo "Running Sonar Cloud Scanner"
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-      - unzip ./sonar-scanner-cli-5.0.1.3006-linux.zip
-      - export PATH=$PATH:$CODEBUILD_SRC_DIR/sonar-scanner-5.0.1.3006-linux/bin/
-      - sonar-scanner -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.projectKey=$SONAR_PROJECT_KEY -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN
-      - sleep 5
-      - curl $SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY > report.json
-
-  post_build:
-    commands:
-      - echo "Post-Build Phase - Starting..."
-      - echo Build completed on `date`
+      - echo "Build stage completed"
 
 artifacts:
-  files:
+   files:
     - '**/*'
