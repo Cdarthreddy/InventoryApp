@@ -12,6 +12,10 @@ phases:
       - python manage.py collectstatic --noinput
       - pylint smart_invent/**/*.py || true
       - echo "pre build stage completed"
+      - echo "Django Test Cases Started"
+      - python manage.py test
+      - echo "Django Test Cases Completed!!"
+      - echo "Build stage completed!"
   build:
     commands:
       - echo "Build stage completed"
