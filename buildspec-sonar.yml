@@ -1,7 +1,7 @@
 version: 0.2
 env:
   secrets-manager:
-    LOGIN: prod/sonarcloud/x24135003:sonartoken
+    LOGIN: prod/sonarcloud/x24135003:token
     HOST: prod/sonarcloud/x24135003:host
     Organization: prod/sonarcloud/x24135003:Organization
     Project: prod/sonarcloud/x24135003:Project
